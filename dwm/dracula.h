@@ -1,0 +1,10 @@
+static const char background[] 	= "#282a36";
+static const char bg_alt[] 	= "#44475a";
+static const char foreground[] 	= "#f8f8f8";
+static const char cyan[] 	= "#8be9fd";
+static const char green[] 	= "#50fa7b";
+static const char orange[] 	= "#ffb86c";
+static const char pink[] 	= "#ff79c6";
+static const char purple[] 	= "#bd93f9";
+static const char red[] 	= "#ff5555";
+static const char yellow[] 	= "#f1fa8c";
