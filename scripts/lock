@@ -1,0 +1,6 @@
+#!/bin/bash
+
+cd /tmp
+scrot -oF lockscreen.png
+convert -blur 2x8 lockscreen.png blurred-lockscreen.png 
+i3lock -ubi blurred-lockscreen.png

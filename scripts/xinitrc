@@ -1,6 +1,8 @@
 #!/bin/bash
 
 ~/.fehbg &
-picom &
+picom --blur-background --corner-radius 10 &
 /home/sad/statusbar.sh &
+monitor.sh &
+mpd &
 while type dwm >/dev/null; do dwm && continue || break; done

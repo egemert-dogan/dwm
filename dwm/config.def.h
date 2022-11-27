@@ -1,8 +1,11 @@
+/* MADE BY SAD21 A.K.A. sad */
+
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
 static const unsigned int borderpx  = 0;        /* border pixel of windows */
 static const unsigned int snap      = 10;       /* snap pixel */
+static const int swallowfloating    = 1;
 static const unsigned int gappih    = 20;       /* horiz inner gap between windows */
 static const unsigned int gappiv    = 20;       /* vert inner gap between windows */
 static const unsigned int gappoh    = 30;       /* horiz outer gap between windows and screen edge */
@@ -15,7 +18,7 @@ static const int sidepad            = 10;       /* horizontal padding of bar */
 static const char *fonts[]          = { "JetBrainsMono Nerd Font:style:medium:pixelsize=15:antialias=true:autohint=true", 
 					"Material Design Icons Desktop:pixelsize=15:antialias=true:autohint=true" };
 
-#include "dracula.h"
+#include "catppuccin.h"
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] 	= { foreground, background, background },
@@ -25,17 +28,12 @@ static const char *colors[][3]      = {
 /* tagging */
 static const char *tags[] = { "", "", "", "", "" };
 
-static const unsigned int ulinepad	= 5;	/* horizontal padding between the underline and tag */
-static const unsigned int ulinestroke	= 2;	/* thickness / height of the underline */
-static const unsigned int ulinevoffset	= 0;	/* how far above the bottom of the bar the line should appear */
-static const int ulineall 		= 0;	/* 1 to show underline on all tags, 0 for just the active ones */
-
 static const char *tagsel[][2] = {
 	{ green, 	background },
 	{ yellow, 	background },
 	{ orange, 	background },
 	{ red, 		background },
-	{ "#6272a4", 	background },
+	{ blue, 	background },
 };
 
 static const Rule rules[] = {
@@ -43,13 +41,14 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	/* class      instance    title       tags mask     isfloating    isterminal  noswallow      monitor */
+	{ "Gimp",     NULL,       NULL,       0,            0,            0,          0, 	     -1 },
+	{ "Firefox",  NULL,       NULL,       1 << 8,       0,            0,	      -1,            -1 },
+	{ "Alacritty", NULL, 	  NULL,       0,            0, 		  1,          0,             -1 },
 };
 
 /* layout(s) */
-static const float mfact     = 0.50; /* factor of master area size [0.05..0.95] */
+static const float mfact     = 0.40; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
 static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
@@ -84,10 +83,13 @@ static const char *termcmd[]  = { "alacritty", NULL };
 static const char *downvol[]  = { "pamixer", "-d", "5", NULL };
 static const char *mutevol[]  = { "pamixer", "-t", NULL };
 static const char *upvol[]    = { "pamixer", "-i", "5", NULL };
+static const char *lock[]     = { "lock", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_d,      spawn,          SHCMD("rofi -show drun") },
+	{ MODKEY,                       XK_f,      spawn,          SHCMD("rofi -show run") },
+	{ MODKEY,                       XK_g,      spawn,          SHCMD("rofi -show window") },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
@@ -96,6 +98,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_j,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
+	{ MODKEY, 			XK_p, 	   spawn, 	   {.v = lock } },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY,	                XK_c,      killclient,     {0} },
 	{ MODKEY|ShiftMask,             XK_z,      setlayout,      {.v = &layouts[0]} },

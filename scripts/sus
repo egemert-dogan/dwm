@@ -1,0 +1,5 @@
+#!/bin/bash
+
+lock
+sleep 2
+loginctl suspend

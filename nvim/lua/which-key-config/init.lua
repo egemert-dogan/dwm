@@ -14,7 +14,8 @@ local mappings = {
 	b = { "<cmd>Telescope buffers<cr>", "Buffers" },
 	j = { "<cmd>bp<cr>", "Next buffer" },
 	k = { "<cmd>bn<cr>", "Previous buffer" },
-	t = { toggle_float, "Open a floating terminal" }
+	t = { toggle_float, "Open a floating terminal" },
+	n = { "<cmd>NvimTreeToggle<cr>", "Toggle Nvim Tree" }
 
 }
 
